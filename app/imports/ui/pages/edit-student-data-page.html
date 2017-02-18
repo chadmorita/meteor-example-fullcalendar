@@ -1,0 +1,26 @@
+<template name="Edit_Student_Data_Page">
+
+  {{#if Template.subscriptionsReady}}
+  <div style="margin-top: 20px" class="ui container">
+
+    <form class="ui form student-data-form {{ successClass }} {{ errorClass }}">
+      <h4 class="ui dividing header">Edit Student Data</h4>
+
+      {{> Text_Form_Control label="Name" required=true value=(studentDataField 'name') errorMessage=(fieldError "name")}}
+      {{> TextArea_Form_Control label="Bio" value=(studentDataField 'bio') placeholder="Short bio statement here" errorMessage=(fieldError "bio")}}
+      {{> Checkbox_Form_Control label="Hobbies" checkboxes=hobbies }}
+      {{> Radio_Form_Control label="Level" name="Level" required=true radios=levels errorMessage=(fieldError "level") }}
+      {{> Select_Form_Control label="GPA" required=true options=GPAs errorMessage=(fieldError "gpa") }}
+      {{> Select_Form_Control label="Majors" options=majors errorMessage=(fieldError "majors") multiple=true }}
+
+      <button class="ui primary button" type="submit">Update</button>
+      {{#if displaySuccessMessage}}
+      <div class="ui success message">
+        <p>Student data successfully updated.</p>
+      </div>
+      {{/if}}
+    </form>
+
+  </div>
+  {{/if}}
+</template>
