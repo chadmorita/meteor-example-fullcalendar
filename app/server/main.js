@@ -1,2 +1,2 @@
-import '/imports/api/studentdata';
+import '/imports/api/eventdata';
 import '/imports/startup/server';

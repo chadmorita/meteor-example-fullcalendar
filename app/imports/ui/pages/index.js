@@ -1,6 +1,3 @@
-import './create-student-data-page.html';
-import './create-student-data-page.js';
-
-import './edit-student-data-page.html';
-import './edit-student-data-page.js';
-
+import './calendar-page.html';
+import './calendar-page.js';
+import './create-event-modal.html';

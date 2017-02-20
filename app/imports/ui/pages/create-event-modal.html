@@ -1,0 +1,163 @@
+<template name="Create_Event_Modal">
+  <div class="ui raised segment container">
+    <form class="ui form session-data-form {{ errorClass }}">
+      <h2 class="ui dividing header">Create an Event</h2>
+      <div class="field">
+        <label>Title</label>
+        <div class="field">
+          <input type="text" name="title" id="title" placeholder="A name for your study session">
+        </div>
+        {{#if displayFieldError 'title' }}
+          <div class="ui error message">
+            <p>You must specify the title of this session.</p>
+          </div>
+        {{/if}}
+      </div>
+
+      <div class="two fields">
+        <div class="field">
+          <label>Course</label>
+          <select class="ui fluid search dropdown" name="course" id="course">
+            <option value="">Select a Course</option>
+            <option value="ICS 111">ICS 111 - Introduction to Computer Science I</option>
+            <option value="ICS 141">ICS 141 - Discrete Mathematics for Computer Science I</option>
+            <option value="ICS 211">ICS 211 - Introduction to Computer Science II</option>
+            <option value="ICS 241">ICS 241 - Discrete Mathematics for Computer Science II</option>
+            <option value="ICS 314">ICS 314 - Software Engineering I</option>
+            <option value="MATH 241">MATH 241 - Calculus I</option>
+            <option value="MATH 242">MATH 242 - Calculus II</option>
+            <option value="MATH 371">MATH 371 - Elementary Probability Theory</option>
+          </select>
+          {{#if displayFieldError 'course' }}
+            <div class="ui error message">
+              <p>Please specify the course of this session.</p>
+            </div>
+          {{/if}}
+        </div>
+        <div class="field">
+          <label>Topic</label>
+          <div class="field">
+            <input type="text" name="topic" id="topic" placeholder="Topic/Subject/Chapter to be discussed">
+          </div>
+          {{#if displayFieldError 'topic' }}
+            <div class="ui error message">
+              <p>Please specify the topic of this session.</p>
+            </div>
+          {{/if}}
+        </div>
+      </div>
+
+      <div class="two fields">
+        <div class="field">
+          <label>Start Time</label>
+          <select class="ui fluid search dropdown" name="start" id="start">
+            <option value="">Select a Start Time</option>
+            <option value="00:00">12:00AM</option>
+            <option value="01:00">1:00AM</option>
+            <option value="02:00">2:00AM</option>
+            <option value="03:00">3:00AM</option>
+            <option value="04:00">4:00AM</option>
+            <option value="05:00">5:00AM</option>
+            <option value="06:00">6:00AM</option>
+            <option value="07:00">7:00AM</option>
+            <option value="08:00">8:00AM</option>
+            <option value="09:00">9:00AM</option>
+            <option value="10:00">10:00AM</option>
+            <option value="11:00">11:00AM</option>
+            <option value="12:00">12:00PM</option>
+            <option value="13:00">1:00PM</option>
+            <option value="14:00">2:00PM</option>
+            <option value="15:00">3:00PM</option>
+            <option value="16:00">4:00PM</option>
+            <option value="17:00">5:00PM</option>
+            <option value="18:00">6:00PM</option>
+            <option value="19:00">7:00PM</option>
+            <option value="20:00">8:00PM</option>
+            <option value="21:00">9:00PM</option>
+            <option value="22:00">10:00PM</option>
+            <option value="23:00">11:00PM</option>
+          </select>
+          {{#if displayFieldError 'start' }}
+            <div class="ui error message">
+              <p>Please specify the start time of this session.</p>
+            </div>
+          {{/if}}
+        </div>
+
+        <div class="field">
+          <label>End Time</label>
+          <select class="ui fluid search dropdown" name="end" id="end">
+            <option value="">Select an End Time</option>
+            <option value="00:00">12:00AM</option>
+            <option value="01:00">1:00AM</option>
+            <option value="02:00">2:00AM</option>
+            <option value="03:00">3:00AM</option>
+            <option value="04:00">4:00AM</option>
+            <option value="05:00">5:00AM</option>
+            <option value="06:00">6:00AM</option>
+            <option value="07:00">7:00AM</option>
+            <option value="08:00">8:00AM</option>
+            <option value="09:00">9:00AM</option>
+            <option value="10:00">10:00AM</option>
+            <option value="11:00">11:00AM</option>
+            <option value="12:00">12:00PM</option>
+            <option value="13:00">1:00PM</option>
+            <option value="14:00">2:00PM</option>
+            <option value="15:00">3:00PM</option>
+            <option value="16:00">4:00PM</option>
+            <option value="17:00">5:00PM</option>
+            <option value="18:00">6:00PM</option>
+            <option value="19:00">7:00PM</option>
+            <option value="20:00">8:00PM</option>
+            <option value="21:00">9:00PM</option>
+            <option value="22:00">10:00PM</option>
+            <option value="23:00">11:00PM</option>
+          </select>
+          {{#if displayFieldError 'end' }}
+            <div class="ui error message">
+              <p>Please specify the end time of this session.</p>
+            </div>
+          {{/if}}
+        </div>
+        {{#if displayFieldError 'endV' }}
+          <div class="ui error message">
+            <p>Please enter an end time for this session later than it's start time.</p>
+          </div>
+        {{/if}}
+      </div>
+
+      {{#if groupSession}}
+        <div class="field">
+          <label>Add As Pro</label>
+          <select class="ui fluid search dropdown" multiple="" name="groupJoin" id="groupJoin">
+            <option value="">Select Members</option>
+            {{#each member in findGroup.members}}
+              <option value="{{member}}">{{member}}</option>
+            {{/each}}
+          </select>
+          <label>*Every group member not listed above will be added to this session as a Stud.</label>
+        </div>
+      {{else}}
+        <div class="grouped fields">
+          <label>Join session</label>
+          <div class="field">
+            <div class="ui radio checkbox">
+              <input type="radio" name="indivJoin" checked value="joinPro">
+              <label>As a Pro</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui radio checkbox">
+              <input type="radio" name="indivJoin" value="joinStud">
+              <label>As a Stud</label>
+            </div>
+          </div>
+        </div>
+      {{/if}}
+
+      <button class="ui teal button" type="submit">Create Study Session</button>
+      <button class="ui red button cancel">Cancel</button>
+    </form>
+  </div>
+
+</template>

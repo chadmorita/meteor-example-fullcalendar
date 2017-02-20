@@ -38,6 +38,7 @@ email@1.1.18
 es5-shim@4.6.15
 fabienb4:autoform-semantic-ui@0.9.3
 fastclick@1.0.13
+fullcalendar:fullcalendar@2.9.0
 geojson-utils@1.0.10
 hot-code-push@1.0.4
 html-tools@1.0.11

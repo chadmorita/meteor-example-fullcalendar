@@ -2,16 +2,9 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 
 FlowRouter.route('/', {
-  name: 'Create_Student_Data_Page',
+  name: 'Calendar_Page',
   action() {
-    BlazeLayout.render('App_Layout', { main: 'Create_Student_Data_Page' });
-  },
-});
-
-FlowRouter.route('/studentdata/:_id', {
-  name: 'Edit_Student_Data_Page',
-  action() {
-    BlazeLayout.render('App_Layout', { main: 'Edit_Student_Data_Page' });
+    BlazeLayout.render('App_Layout', { main: 'Calendar_Page' });
   },
 });
 

@@ -1,6 +1,6 @@
-import { StudentData } from '../../api/studentdata/studentdata.js';
+import { EventData } from '../../api/eventdata/eventdata.js';
 import { Meteor } from 'meteor/meteor';
 
-Meteor.publish('StudentData', function publishStudentData() {
-  return StudentData.find();
+Meteor.publish('EventData', function publishStudentData() {
+  return EventData.find();
 });
