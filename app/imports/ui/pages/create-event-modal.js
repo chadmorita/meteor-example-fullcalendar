@@ -8,13 +8,13 @@ import { EventData, EventDataSchema } from '../../api/eventdata/eventdata.js';
 
 const displayErrorMessages = 'displayErrorMessages';
 
-Template.Create_Study_Session_Page.onCreated(function onCreated() {
+Template.Create_Event_Modal.onCreated(function onCreated() {
   this.messageFlags = new ReactiveDict();
   this.messageFlags.set(displayErrorMessages, false);
-  this.context = SessionsSchema.namedContext('Create_Event_Modal');
+  this.context = EventDataSchema.namedContext('Create_Event_Modal');
 });
 
-Template.Create_Study_Session_Page.helpers({
+Template.Create_Event_Modal.helpers({
   errorClass() {
     return Template.instance().messageFlags.get(displayErrorMessages) ? 'error' : '';
   },
@@ -24,13 +24,13 @@ Template.Create_Study_Session_Page.helpers({
   },
 });
 
-Template.Create_Study_Session_Page.onRendered(function enableSemantic() {
+Template.Create_Event_Modal.onRendered(function enableSemantic() {
   const instance = this;
   instance.$('.ui.radio.checkbox').checkbox();
   instance.$('.ui.fluid.search.dropdown').dropdown();
 });
 
-Template.Create_Study_Session_Page.events({
+Template.Create_Event_Modal.events({
   'submit .session-data-form'(event, instance) {
     event.preventDefault();
     // console.log(Session.get('eventModal'));
@@ -96,7 +96,7 @@ Template.Create_Study_Session_Page.events({
     // Clear out any old validation errors.
     instance.context.resetValidation();
     // Invoke clean so that newSession reflects what will be inserted.
-    SessionsSchema.clean(newSession);
+    EventDataSchema.clean(newSession);
     // Determine validity.
     instance.context.validate(newSession);
     if (instance.context.isValid()) {
