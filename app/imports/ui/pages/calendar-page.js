@@ -32,26 +32,6 @@ Template.Calendar_Page.onRendered(() => {
           `
       );
     },
-    // // Drag and drop events.
-    // eventDrop(session, delta, revert) {
-    //   let date = session.start.format();
-    //   if (!isPast(date)) {
-    //     let update = {
-    //       _id: session._id,
-    //       start: date,
-    //       end: date
-    //     };
-    //
-    //     Meteor.call('editEvent', update, (error) => {
-    //       if (error) {
-    //         Bert.alert(error.reason, 'danger');
-    //       }
-    //     });
-    //   } else {
-    //     revert();
-    //     Bert.alert('Sorry, you can\'t move items to the past!', 'danger');
-    //   }
-    // },
     // Modal to add event when clicking on a day.
     dayClick(date, session) {
       Session.set('eventModal', { type: 'add', date: date.format() });
@@ -62,12 +42,6 @@ Template.Calendar_Page.onRendered(() => {
         $('#calendar').modal({ blurring: true }).modal('show');
       }
     },
-
-    // Directs to study session detail page.
-    // eventClick(event) {
-    //   Session.set('eventModal', { type: 'edit', event: event._id });
-    //   FlowRouter.go('Study_Session_Detail_Page', { _id: event._id });
-    // },
   });
 
   // Updates the calendar if there are changes.

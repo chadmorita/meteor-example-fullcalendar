@@ -14,36 +14,60 @@
         {{/if}}
       </div>
 
-      <div class="two fields">
+      <div class="three fields">
         <div class="field">
-          <label>Course</label>
-          <select class="ui fluid search dropdown" name="course" id="course">
-            <option value="">Select a Course</option>
-            <option value="ICS 111">ICS 111 - Introduction to Computer Science I</option>
-            <option value="ICS 141">ICS 141 - Discrete Mathematics for Computer Science I</option>
-            <option value="ICS 211">ICS 211 - Introduction to Computer Science II</option>
-            <option value="ICS 241">ICS 241 - Discrete Mathematics for Computer Science II</option>
-            <option value="ICS 314">ICS 314 - Software Engineering I</option>
-            <option value="MATH 241">MATH 241 - Calculus I</option>
-            <option value="MATH 242">MATH 242 - Calculus II</option>
-            <option value="MATH 371">MATH 371 - Elementary Probability Theory</option>
-          </select>
-          {{#if displayFieldError 'course' }}
-            <div class="ui error message">
-              <p>Please specify the course of this session.</p>
-            </div>
-          {{/if}}
+            <label>Month</label>
+            <select class="ui fluid search dropdown" name="month" id="month">
+              <option value="">Select a Month</option>
+              <option value="01">January</option>
+              <option value="02">February</option>
+              <option value="03">March</option>
+              <option value="04">April</option>
+              <option value="05">May</option>
+              <option value="06">June</option>
+              <option value="07">July</option>
+              <option value="08">August</option>
+              <option value="09">September</option>
+              <option value="10">October</option>
+              <option value="11">November</option>
+              <option value="12">December</option>
+            </select>
         </div>
         <div class="field">
-          <label>Topic</label>
-          <div class="field">
-            <input type="text" name="topic" id="topic" placeholder="Topic/Subject/Chapter to be discussed">
-          </div>
-          {{#if displayFieldError 'topic' }}
-            <div class="ui error message">
-              <p>Please specify the topic of this session.</p>
-            </div>
-          {{/if}}
+            <label>Day</label>
+            <select class="ui fluid search dropdown" name="month" id="month">
+              <option value="">Select a Day</option>
+              <option value="01">1</option>
+              <option value="02">2</option>
+              <option value="03">3</option>
+              <option value="04">4</option>
+              <option value="05">5</option>
+              <option value="06">6</option>
+              <option value="07">7</option>
+              <option value="08">8</option>
+              <option value="09">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+              <option value="15">15</option>
+              <option value="16">16</option>
+              <option value="17">17</option>
+              <option value="18">18</option>
+              <option value="19">19</option>
+              <option value="20">20</option>
+              <option value="21">21</option>
+              <option value="22">22</option>
+              <option value="23">23</option>
+              <option value="24">24</option>
+              <option value="25">25</option>
+              <option value="26">25</option>
+              <option value="26">25</option>
+            </select>
+        </div>
+        <div class="field">
+            <label>Year</label>
         </div>
       </div>
 
