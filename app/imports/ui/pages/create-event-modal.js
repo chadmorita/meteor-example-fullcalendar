@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { FlowRouter } from 'meteor/kadira:flow-router';
@@ -24,97 +25,67 @@ Template.Create_Event_Modal.helpers({
   },
 });
 
+// Enable Semantic UI.
 Template.Create_Event_Modal.onRendered(function enableSemantic() {
-  const instance = this;
-  instance.$('.ui.radio.checkbox').checkbox();
-  instance.$('.ui.fluid.search.dropdown').dropdown();
+  this.$('.ui.fluid.search.dropdown').dropdown();
 });
 
 Template.Create_Event_Modal.events({
   'submit .session-data-form'(event, instance) {
     event.preventDefault();
-    // console.log(Session.get('eventModal'));
-    let newSession = Session.get('eventModal');
+    let newEvent = Session.get('eventModal');
+
+    // Get the title of the event.
     const title = event.target.title.value;
-    const name = Meteor.user().profile.name;
-    let guestsPros = [];
-    let guestsStuds = [];
-    const e = document.getElementById(event.target.course.id);
-    let course = e.options[e.selectedIndex].value;
-    if (course === 'Select a Course') {
-      course = '';
-    }
-    const topic = [event.target.topic.value];
+
+    // Get the start date/time and format it to ISO 8601
     const f = document.getElementById(event.target.start.id);
-    // Get the date and add the time to the end.
-    let start = newSession.date+"T"+f.options[f.selectedIndex].value+"-10:00";
-    if (start === 'Select a Start Time') {
-      start = '';
+    let start = newEvent.date+"T"+f.options[f.selectedIndex].value+"-10:00";
+    if (f.options[f.selectedIndex].value === 'Select a Start Time') {
+      start = "";
     }
+
+    // Get the end date/time and format it to ISO 8601
     const g = document.getElementById(event.target.end.id);
-    let end = newSession.date+"T"+g.options[g.selectedIndex].value+"-10:00";
-    if (end === 'Select an End Time') {
-      end = '';
+    let end = newEvent.date+"T"+g.options[g.selectedIndex].value+"-10:00";
+    if (g.options[g.selectedIndex].value === 'Select an End Time') {
+      end = "";
     }
-    const startV = parseInt(event.target.start.value);
-    const endV = parseInt(event.target.end.value);
+
+    // Store the starta dn end time as integers.
+    const startValue = parseInt(event.target.start.value);
+    const endValue = parseInt(event.target.end.value);
 
     // Store the start and end time in a string format.
     const startString = f.options[f.selectedIndex].text;
     const endString = g.options[g.selectedIndex].text;
 
-    //console.log(startString);
-    //console.log(endString);
+    newEvent = { title, start, end, startValue, endValue, startString, endString };
+    console.log(newEvent);
 
-    if (document.getElementById('groupJoin') === null) {
-      const indivJoin = event.target.indivJoin.value;
-      if (indivJoin === 'joinPro') {
-        guestsPros.push(name);
-      } else {
-        guestsStuds.push(name);
-      }
-    } else {
-      const groupJoin = document.getElementById('groupJoin');
-      const pros = [];
-      const studs = [];
-      for (let i = 0; i < groupJoin.options.length; i++) {
-        if (groupJoin.options[i].selected) {
-          pros.push(groupJoin.options[i].value);
-        }
-        else
-          if (groupJoin.options[i].value != '') {
-            studs.push(groupJoin.options[i].value);
-          }
-      }
-      guestsPros = pros;
-      guestsStuds = studs;
-    }
-
-
-    // const newSession = { name, course, topic, start, end, startV, endV };
-    newSession = { title, name, course, topic, start, end, startV, endV, startString, endString, guestsPros, guestsStuds };
     // Clear out any old validation errors.
     instance.context.resetValidation();
-    // Invoke clean so that newSession reflects what will be inserted.
-    EventDataSchema.clean(newSession);
+
+    // Invoke clean so that newEvent reflects what will be inserted.
+    EventDataSchema.clean(newEvent);
+
     // Determine validity.
-    instance.context.validate(newSession);
+    instance.context.validate(newEvent);
     if (instance.context.isValid()) {
-      Sessions.insert(newSession);
+      EventData.insert(newEvent);
       instance.messageFlags.set(displayErrorMessages, false);
-      $('#calendar')
+      $('#create-event-modal')
           .modal('hide')
       ;
       FlowRouter.go('Calendar_Page');
     } else {
-      // console.log("invalid");
       instance.messageFlags.set(displayErrorMessages, true);
     }
   },
 
   'click .cancel'(event, instance){
     event.preventDefault();
-    $('#calendar')
+    $('#create-event-modal')
         .modal('hide')
     ;
   },

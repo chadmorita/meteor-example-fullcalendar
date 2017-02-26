@@ -1,13 +1,21 @@
 import { Tracker } from 'meteor/tracker';
 import { EventData, EventDataSchema } from '../../api/eventdata/eventdata';
 
+// Define a function that checks whether a moment has already passed.
+let isPast = (date) => {
+  let today = moment().format();
+  return moment(today).isAfter(date);
+};
+
 Template.Calendar_Page.onCreated(() => {
   Template.instance().subscribe('EventData');
 });
 
 Template.Calendar_Page.onRendered(() => {
+
   // Initialize the calendar.
   $('#event-calendar').fullCalendar({
+    // Define the navigation buttons.
     header: {
       left:   'title',
       center: '',
@@ -16,7 +24,7 @@ Template.Calendar_Page.onRendered(() => {
     // Add events to the calendar.
     events(start, end, timezone, callback) {
       let data = EventData.find().fetch().map((session) => {
-        // Don't allow already past study sessions to be editable.
+        // Don't allow already past study events to be editable.
         session.editable = !isPast(session.start);
         return session;
       });
@@ -25,49 +33,43 @@ Template.Calendar_Page.onRendered(() => {
         callback(data);
       }
     },
+
+    // Configure the information displayed for an "event."
     eventRender(session, element) {
       element.find('.fc-content').html(
-          `<h4 class="course">${session.course}</h4>
-          <p class="topic">${session.topic}</p>
+          `<h4 class="title">${session.title}</h4>
+          <p class="time">${session.startString}</p>
           `
       );
     },
-    // // Drag and drop events.
-    // eventDrop(session, delta, revert) {
-    //   let date = session.start.format();
-    //   if (!isPast(date)) {
-    //     let update = {
-    //       _id: session._id,
-    //       start: date,
-    //       end: date
-    //     };
-    //
-    //     Meteor.call('editEvent', update, (error) => {
-    //       if (error) {
-    //         Bert.alert(error.reason, 'danger');
-    //       }
-    //     });
-    //   } else {
-    //     revert();
-    //     Bert.alert('Sorry, you can\'t move items to the past!', 'danger');
-    //   }
-    // },
-    // Modal to add event when clicking on a day.
+
+    // Triggered when a day is clicked on.
     dayClick(date, session) {
+      // Store the date so it can be used when adding an event to the EventData collection.
       Session.set('eventModal', { type: 'add', date: date.format() });
-      console.log("Clicked on the day.");
-      // Check if the date has already passed.
-      if(!moment(date.format()).isBefore(moment())) {
-        console.log("Show the modal");
-        $('#calendar').modal({ blurring: true }).modal('show');
+      // If the date has not already passed, show the create event modal.
+      if(moment(date.format()).isSameOrAfter(moment(), 'day')) {
+        $('#create-event-modal').modal({ blurring: true }).modal('show');
       }
     },
 
-    // Directs to study session detail page.
-    // eventClick(event) {
-    //   Session.set('eventModal', { type: 'edit', event: event._id });
-    //   FlowRouter.go('Study_Session_Detail_Page', { _id: event._id });
-    // },
+    // Allow events to be dragged and dropped.
+    eventDrop(session, delta, revert) {
+      let date = session.start.format();
+
+      if (!isPast(date)) {
+        let update = {
+          _id: session._id,
+          start: date,
+          end: date
+        };
+
+        // Update the date of the event.
+        Meteor.call('editEvent', update);
+      } else {
+        revert();
+      }
+    },
   });
 
   // Updates the calendar if there are changes.
