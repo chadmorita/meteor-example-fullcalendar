@@ -42,7 +42,7 @@ Template.Calendar_Page.onRendered(() => {
     dayClick(date, session) {
       Session.set('eventModal', { type: 'add', date: date.format() });
       // Check if the date that was clicked on has already passed.
-      if(moment(date.isSameOrAfter(moment(), 'day')) {
+      if(moment(date.isSameOrAfter(moment(), 'day'))) {
         $('#calendar').modal({ blurring: true }).modal('show');
       }
     },
