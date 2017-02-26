@@ -1,6 +1,12 @@
 import { Tracker } from 'meteor/tracker';
 import { EventData, EventDataSchema } from '../../api/eventdata/eventdata';
 
+let isPast = (date) => {
+  // Get access to today's moment
+  let today = moment().format();
+  return moment(today).isAfter(date);
+};
+
 Template.Calendar_Page.onCreated(() => {
   Template.instance().subscribe('EventData');
 });
@@ -16,7 +22,7 @@ Template.Calendar_Page.onRendered(() => {
     // Add events to the calendar.
     events(start, end, timezone, callback) {
       let data = EventData.find().fetch().map((session) => {
-        // Don't allow already past study sessions to be editable.
+        // Don't allow already past study events to be editable.
         session.editable = !isPast(session.start);
         return session;
       });
@@ -27,47 +33,19 @@ Template.Calendar_Page.onRendered(() => {
     },
     eventRender(session, element) {
       element.find('.fc-content').html(
-          `<h4 class="course">${session.course}</h4>
-          <p class="topic">${session.topic}</p>
+          `<h4 class="title">${session.title}</h4>
+          <p class="time">${session.startString}</p>
           `
       );
     },
-    // // Drag and drop events.
-    // eventDrop(session, delta, revert) {
-    //   let date = session.start.format();
-    //   if (!isPast(date)) {
-    //     let update = {
-    //       _id: session._id,
-    //       start: date,
-    //       end: date
-    //     };
-    //
-    //     Meteor.call('editEvent', update, (error) => {
-    //       if (error) {
-    //         Bert.alert(error.reason, 'danger');
-    //       }
-    //     });
-    //   } else {
-    //     revert();
-    //     Bert.alert('Sorry, you can\'t move items to the past!', 'danger');
-    //   }
-    // },
     // Modal to add event when clicking on a day.
     dayClick(date, session) {
       Session.set('eventModal', { type: 'add', date: date.format() });
-      console.log("Clicked on the day.");
-      // Check if the date has already passed.
-      if(!moment(date.format()).isBefore(moment())) {
-        console.log("Show the modal");
+      // Check if the date that was clicked on has already passed.
+      if(moment(date.isSameOrAfter(moment(), 'day')) {
         $('#calendar').modal({ blurring: true }).modal('show');
       }
     },
-
-    // Directs to study session detail page.
-    // eventClick(event) {
-    //   Session.set('eventModal', { type: 'edit', event: event._id });
-    //   FlowRouter.go('Study_Session_Detail_Page', { _id: event._id });
-    // },
   });
 
   // Updates the calendar if there are changes.

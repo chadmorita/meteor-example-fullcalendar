@@ -1,3 +1,30 @@
 body {
   padding-top: 61px;  /* Move body of page below navbar. */
 }
+
+#calendar-modal {
+    padding: 10px 10px 10px 10px;
+}
+
+.fc-event-container {
+  padding: 5px !important;
+}
+
+.fc-event {
+  padding: 5px 10px;
+  border-color: #ddd;
+  background: black;
+}
+
+.fc-content {
+  color: white;
+}
+
+.title {
+    margin: 0;
+    font-weight: normal;
+}
+
+.time {
+    margin: 0;
+}
