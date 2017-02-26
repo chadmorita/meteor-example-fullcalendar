@@ -21,11 +21,11 @@ Template.Create_Event_Modal.helpers({
   },
   displayFieldError(fieldName) {
     const errorKeys = Template.instance().context.invalidKeys();
-    console.log(errorKeys);
     return _.find(errorKeys, (keyObj) => keyObj.name === fieldName);
   },
 });
 
+// Enable Semantic UI.
 Template.Create_Event_Modal.onRendered(function enableSemantic() {
   this.$('.ui.fluid.search.dropdown').dropdown();
 });
@@ -72,10 +72,9 @@ Template.Create_Event_Modal.events({
     // Determine validity.
     instance.context.validate(newEvent);
     if (instance.context.isValid()) {
-      console.log("inserting");
       EventData.insert(newEvent);
       instance.messageFlags.set(displayErrorMessages, false);
-      $('#calendar')
+      $('#create-event-modal')
           .modal('hide')
       ;
       FlowRouter.go('Calendar_Page');
@@ -86,7 +85,7 @@ Template.Create_Event_Modal.events({
 
   'click .cancel'(event, instance){
     event.preventDefault();
-    $('#calendar')
+    $('#create-event-modal')
         .modal('hide')
     ;
   },

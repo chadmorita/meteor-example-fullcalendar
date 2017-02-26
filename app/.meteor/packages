@@ -52,5 +52,5 @@ insecure@1.0.7
 
 mdg:validation-error
 reactive-dict@1.1.8
-fullcalendar:fullcalendar
 momentjs:moment
+fullcalendar:fullcalendar

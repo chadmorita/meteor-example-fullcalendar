@@ -1,8 +1,8 @@
 import { Tracker } from 'meteor/tracker';
 import { EventData, EventDataSchema } from '../../api/eventdata/eventdata';
 
+// Define a function that checks whether a moment has already passed.
 let isPast = (date) => {
-  // Get access to today's moment
   let today = moment().format();
   return moment(today).isAfter(date);
 };
@@ -12,8 +12,10 @@ Template.Calendar_Page.onCreated(() => {
 });
 
 Template.Calendar_Page.onRendered(() => {
+
   // Initialize the calendar.
   $('#event-calendar').fullCalendar({
+    // Define the navigation buttons.
     header: {
       left:   'title',
       center: '',
@@ -31,6 +33,8 @@ Template.Calendar_Page.onRendered(() => {
         callback(data);
       }
     },
+
+    // Configure the information displayed for an "event."
     eventRender(session, element) {
       element.find('.fc-content').html(
           `<h4 class="title">${session.title}</h4>
@@ -38,12 +42,32 @@ Template.Calendar_Page.onRendered(() => {
           `
       );
     },
-    // Modal to add event when clicking on a day.
+
+    // Triggered when a day is clicked on.
     dayClick(date, session) {
+      // Store the date so it can be used when adding an event to the EventData collection.
       Session.set('eventModal', { type: 'add', date: date.format() });
-      // Check if the date that was clicked on has already passed.
-      if(moment(date.isSameOrAfter(moment(), 'day'))) {
-        $('#calendar').modal({ blurring: true }).modal('show');
+      // If the date has not already passed, show the create event modal.
+      if(moment(date.format()).isSameOrAfter(moment(), 'day')) {
+        $('#create-event-modal').modal({ blurring: true }).modal('show');
+      }
+    },
+
+    // Allow events to be dragged and dropped.
+    eventDrop(session, delta, revert) {
+      let date = session.start.format();
+
+      if (!isPast(date)) {
+        let update = {
+          _id: session._id,
+          start: date,
+          end: date
+        };
+
+        // Update the date of the event.
+        Meteor.call('editEvent', update);
+      } else {
+        revert();
       }
     },
   });

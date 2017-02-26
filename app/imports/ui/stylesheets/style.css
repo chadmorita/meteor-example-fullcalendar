@@ -3,28 +3,30 @@ body {
 }
 
 #calendar-modal {
-    padding: 10px 10px 10px 10px;
+    padding: 10px 10px 10px 10px; /* Add padding to the edges of the modal. */
 }
 
 .fc-event-container {
-  padding: 5px !important;
+  padding: 5px !important; /* Add padding between events. */
 }
 
 .fc-event {
-  padding: 5px 10px;
-  border-color: #ddd;
-  background: black;
+  padding: 5px 10px; /* Add padding between event text and the edge. */
+  border-color: #ddd; /* Set border color. */
+  background: black; /* Set the event background to black. */
 }
 
 .fc-content {
-  color: white;
+  color: white; /* Set the event text to white */
 }
 
+/* Configure the event title text. */
 .title {
     margin: 0;
     font-weight: normal;
 }
 
+/* Configure the event time text. */
 .time {
     margin: 0;
 }
