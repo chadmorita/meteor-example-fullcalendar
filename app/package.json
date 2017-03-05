@@ -1,5 +1,5 @@
 {
-  "name": "meteor-example-form",
+  "name": "meteor-example-fullcalendar",
   "private": true,
   "scripts": {
     "start": "meteor --no-release-check",

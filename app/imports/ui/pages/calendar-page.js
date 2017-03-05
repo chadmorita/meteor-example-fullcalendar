@@ -1,5 +1,5 @@
 import { Tracker } from 'meteor/tracker';
-import { EventData, EventDataSchema } from '../../api/eventdata/eventdata';
+import { EventData } from '../../api/eventdata/eventdata';
 
 // Define a function that checks whether a moment has already passed.
 let isPast = (date) => {

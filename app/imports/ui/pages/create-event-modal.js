@@ -1,11 +1,11 @@
-import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import { Session } from 'meteor/session';
 import { _ } from 'meteor/underscore';
 import { EventData, EventDataSchema } from '../../api/eventdata/eventdata.js';
 
-/* eslint-disable no-param-reassign */
+/* eslint-disable object-shorthand, no-unused-vars, no-param-reassign */
 
 const displayErrorMessages = 'displayErrorMessages';
 
@@ -40,19 +40,19 @@ Template.Create_Event_Modal.events({
 
     // Get the start date/time and format it to ISO 8601
     const f = document.getElementById(event.target.start.id);
-    let start = newEvent.date+"T"+f.options[f.selectedIndex].value+"-10:00";
+    let start = `${newEvent.date}T${f.options[f.selectedIndex].value}-10:00`;
     if (f.options[f.selectedIndex].value === 'Select a Start Time') {
-      start = "";
+      start = '';
     }
 
     // Get the end date/time and format it to ISO 8601
     const g = document.getElementById(event.target.end.id);
-    let end = newEvent.date+"T"+g.options[g.selectedIndex].value+"-10:00";
+    let end = `${newEvent.date}T${g.options[g.selectedIndex].value}-10:00`;
     if (g.options[g.selectedIndex].value === 'Select an End Time') {
-      end = "";
+      end = '';
     }
 
-    // Store the starta dn end time as integers.
+    // Store the start and end time as integers.
     const startValue = parseInt(event.target.start.value);
     const endValue = parseInt(event.target.end.value);
 
@@ -83,7 +83,7 @@ Template.Create_Event_Modal.events({
     }
   },
 
-  'click .cancel'(event, instance){
+  'click .cancel'(event) {
     event.preventDefault();
     $('#create-event-modal')
         .modal('hide')
