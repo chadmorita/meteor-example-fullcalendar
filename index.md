@@ -67,30 +67,30 @@ To best understand this application, it is useful to first familiarize yourself 
 ## UI Walkthrough
 
 The homepage of the application displays a calendar page.
-![Calendar Page](../doc/calendar-page.png)
+![Calendar Page](./doc/calendar-page.png)
 
 The left and right arrows can be used to change the month that is display and the today button will reset the calendar to the current day. Clicking on any day on or after the current day will trigger a Semantic UI Modal to appear, which is used to create an event.
 
-![Create Event Modal](../doc/create-event-modal.png)
+![Create Event Modal](./doc/create-event-modal.png)
 
 Clicking on the Create Event button without first filling out the form will cause error messages to be displayed. All events must have a title, start time, and end time. The start time must be before the end time.
 
-![Error Messages](../doc/error-messages.png)
+![Error Messages](./doc/error-messages.png)
 
 Once valid information is entered into the form, you can press Create Event to insert a new event into the `EventData` collection.
 
-![Create Event](../doc/create-event.png)
+![Create Event](./doc/create-event.png)
 
 After clicking on Create Event, the modal will close and a new event with the information you entered will be displayed on the calendar with its title and start time.
 
-![Calendar Events](../doc/calendar-events.png)
+![Calendar Events](./doc/calendar-events.png)
 
 Events can be moved to different days by dragging and dropping them. You cannot move an event to a day that has already passed.
 
-![Drag and Drop](../doc/drag-and-drop.png)
+![Drag and Drop](./doc/drag-and-drop.png)
 
 Clicking on an event will delete it.
 
-![Delete Event](../doc/delete-event.png)
+![Delete Event](./doc/delete-event.png)
 
 ## Code Walkthrough
