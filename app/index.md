@@ -73,4 +73,24 @@ The left and right arrows can be used to change the month that is display and th
 
 ![Create Event Modal](../doc/create-event-modal.png)
 
-Clicking on the Create Event button without first filling out the form will cause error messages to be displayed. 
+Clicking on the Create Event button without first filling out the form will cause error messages to be displayed. All events must have a title, start time, and end time. The start time must be before the end time.
+
+![Error Messages](../doc/error-messages.png)
+
+Once valid information is entered into the form, you can press Create Event to insert a new event into the `EventData` collection.
+
+![Create Event](../doc/create-event.png)
+
+After clicking on Create Event, the modal will close and a new event with the information you entered will be displayed on the calendar with its title and start time.
+
+![Calendar Events](../doc/calendar-events.png)
+
+Events can be moved to different days by dragging and dropping them. You cannot move an event to a day that has already passed.
+
+![Drag and Drop](../doc/drag-and-drop.png)
+
+Clicking on an event will delete it.
+
+![Delete Event](../doc/delete-event.png)
+
+## Code Walkthrough
