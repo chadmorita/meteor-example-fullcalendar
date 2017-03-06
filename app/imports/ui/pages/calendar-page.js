@@ -53,6 +53,11 @@ Template.Calendar_Page.onRendered(() => {
       }
     },
 
+    // Delete an event if it is clicked on.
+    eventClick(event) {
+      EventData.remove({ _id: event._id });
+    },
+
     // Allow events to be dragged and dropped.
     eventDrop(session, delta, revert) {
       let date = session.start.format();

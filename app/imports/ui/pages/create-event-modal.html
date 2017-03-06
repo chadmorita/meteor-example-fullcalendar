@@ -2,11 +2,9 @@
   <div id="calendar-modal" class="ui container">
     <form class="ui form session-data-form {{ errorClass }}">
       <h2 class="ui dividing header">Create an Event</h2>
-      <div class="field">
+      <div class="required field">
         <label>Title</label>
-        <div class="field">
-          <input type="text" name="title" id="title" placeholder="A title for your event">
-        </div>
+         <input type="text" name="title" id="title" placeholder="A title for your event">
         {{#if displayFieldError 'title' }}
           <div class="ui error message">
             <p>You must specify the title of this session.</p>
@@ -15,7 +13,7 @@
       </div>
 
       <div class="two fields">
-        <div class="field">
+        <div class="required field">
           <label>Start Time</label>
           <select class="ui fluid search dropdown" name="start" id="start">
             <option value="Select a Start Time">Select a Start Time</option>
@@ -51,7 +49,7 @@
           {{/if}}
         </div>
 
-        <div class="field">
+        <div class="required field">
           <label>End Time</label>
           <select class="ui fluid search dropdown" name="end" id="end">
             <option value="Select an End Time">Select an End Time</option>
@@ -93,7 +91,7 @@
         {{/if}}
     </div>
 
-      <button class="ui teal button" type="submit">Create Study Session</button>
+      <button class="ui teal button" type="submit">Create Event</button>
       <button class="ui red button cancel">Cancel</button>
     </form>
   </div>
