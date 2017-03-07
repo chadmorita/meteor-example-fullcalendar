@@ -131,6 +131,6 @@ The [Tracker](https://github.com/chadmorita/meteor-example-fullcalendar/blob/mas
  
 #### Create Event Modal
 
-The `create-event-modal` is created using the Semantic UI Modal class [here](https://github.com/chadmorita/meteor-example-fullcalendar/blob/master/app/imports/ui/pages/calendar-page.html#L9). All of the content for the `create-event-modal` is in the[Create_Event_modal template](https://github.com/chadmorita/meteor-example-fullcalendar/blob/master/app/imports/ui/pages/create-event-modal.html). The `create-event-modal` uses form processing that is similar to [meteor-example-form](https://ics-software-engineering.github.io/meteor-example-form/). Once entered information is validated, it is inserted into the `EventData` collection.
+The `create-event-modal` is created using the Semantic UI Modal class [here](https://github.com/chadmorita/meteor-example-fullcalendar/blob/master/app/imports/ui/pages/calendar-page.html#L9). All of the content for the `create-event-modal` is in the [Create_Event_modal template](https://github.com/chadmorita/meteor-example-fullcalendar/blob/master/app/imports/ui/pages/create-event-modal.html). The `create-event-modal` uses form processing that is similar to [meteor-example-form](https://ics-software-engineering.github.io/meteor-example-form/). Once entered information is validated, it is inserted into the `EventData` collection.
 
 
