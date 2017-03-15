@@ -61,7 +61,6 @@ Template.Create_Event_Modal.events({
     const endString = g.options[g.selectedIndex].text;
 
     newEvent = { title, start, end, startValue, endValue, startString, endString };
-    console.log(newEvent);
 
     // Clear out any old validation errors.
     instance.context.resetValidation();
